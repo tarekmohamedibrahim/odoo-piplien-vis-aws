@@ -22,5 +22,6 @@ In this case, from the git hook "pre-push", I collect the files to be pushed to 
 The S3 idea, could be used for the deployment of any application that is comprised of several deployed files, so that one can send only the updated file, not the whole repo.
 
 Notes:
-    I assume that the target folder for the custom odoo modules is called /odoo/custom on the target EC2 instance
-    fill the file "database-name" with the target database on which modules are needed to be upgraded
+    1. I assume that the target folder for the custom odoo modules is called /odoo/custom on the target EC2 instance
+    2. fill the file "database-name" with the target database on which modules are needed to be upgraded
+    3. You have to copy the files in the "git-hooks" folder to your local .git/hooks for this solution to work
