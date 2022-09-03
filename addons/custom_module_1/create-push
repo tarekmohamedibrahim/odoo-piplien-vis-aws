@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#Tarek Ibrahim
+#Cairo 2022-08-25
+
+#This code to create a push to test lambda function
+
+#1st commit 
+rm file1 file2
+git add .
+git commit -m'remove file1, file2'
+
+#2nd commit
+echo `date +'%F %H:%M:%S'` > file1
+git add file1
+git commit -m'file1'
+
+#3rd commit
+echo `date +'%F %H:%M:%S'` > file2
+git add file2
+git commit -m'file2'
+
+#Push
+if [ -n "$1" ]; then
+    git push
+fi
+
+

@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /odoo/custom/
+
+file_exists_behavior: OVERWRITE
+
+hooks:
+  ValidateService:
+    - location: scripts/ValidateService.sh
+      timeout: 3000
+      runas: ubuntu
+
+
+
+

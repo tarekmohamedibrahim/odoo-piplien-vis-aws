@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#Tarek Ibrahim
+#2022-08-23
+#Sample Hook Template
+
+./scripts/get-upgrade-modules

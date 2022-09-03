@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+
+        <record id="lcustody_products_form" model="ir.ui.view">
+            <field name="name">my.table.form.view</field>
+            <field name="model">my.table</field>
+            <field name="arch" type="xml">
+                <form name="my form">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="name2"/>
+                        </group>
+                        <group>
+                            <field name="name3"/>
+                        </group>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+        <record id="lcustody_products_tree" model="ir.ui.view">
+            <field name="name">my.table.tree.view</field>
+            <field name="model">my.table</field>
+            <field name="arch" type="xml">
+                <tree name="my form">
+                    <field name="name"/>
+                    <field name="name2"/>
+                    <field name="name3"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_my_table" model="ir.actions.act_window">
+            <field name="name">my table</field>
+            <field name="res_model">my.table</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Main Menu" id="my_main_menu" sequence="100"/>
+        <menuitem name="Sub Menu" id="my_sub_menu" parent="my_main_menu"/>
+        <menuitem action="action_my_table" name="My Table"
+                  id="menu_action" parent="my_sub_menu"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#Tarek Ibrahim
+#2022-08-23
+#Sample Hook Template
+
+if [ `git branch | awk '/*/ {print $2}'` == 's3-bucket-based' ]; then
+    ./scripts/upload-s3-bucket
+fi

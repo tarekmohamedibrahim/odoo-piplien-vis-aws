@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#Tarek Ibrahim
+#Cairo 2022-Aug-20
+
+#Get modules to be upgraded
+
+dirname=`dirname $0`
+deploy_file='odoo16-deploy.zip'
+branch=`git branch | awk '/* / {print $2}'`
+
+#The following code is for the S3 pipeline source
+#2022-09-01
+
+#Collect files of the next push & Create zip file
+#Note that this script is called from a git hook, at call time, the default path is the root of the git repo
+zip scripts/"$deploy_file" $(git diff --stat --cached origin/"$branch" | awk -F'|' ' /addons\// {print $1}' )
+zip scripts/"$deploy_file" appspec.yml
+zip scripts/"$deploy_file" scripts/*
+
+#Upload this file to aws s3 bucket to use it in deploy process
+aws s3 sync scripts/. s3://odoo16-artifact
+
+rm scripts/"$deploy_file"
+
+exit 0

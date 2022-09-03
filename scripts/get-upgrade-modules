@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#Tarek Ibrahim
+#Cairo 2022-Aug-20
+
+#Get modules to be upgraded
+branch=`git branch | awk '/* / {print $2}'`
+
+dirname=`dirname $0`
+git diff --stat --cached origin/"$branch" | awk -F'/' '/addons/ {print $2}' | uniq > "$dirname/upgrade-modules"
+
+echo 'Modules to be upgraded in the next PUSH:'
+cat "$dirname/upgrade-modules"
