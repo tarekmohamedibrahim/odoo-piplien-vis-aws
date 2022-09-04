@@ -13,12 +13,14 @@ branch=`git branch | awk '/* / {print $2}'`
 
 #Collect files of the next push & Create zip file
 #Note that this script is called from a git hook, at call time, the default path is the root of the git repo
-zip scripts/"$deploy_file" $(git diff --stat --cached origin/"$branch" | awk -F'|' ' /addons\// {print $1}' )
-zip scripts/"$deploy_file" appspec.yml
-zip scripts/"$deploy_file" scripts/*
+[ ! -d tmp ] && mkdir tmp
+zip scripts/tmp/"$deploy_file" $(git diff --stat --cached origin/"$branch" | awk -F'|' ' /addons\// {print $1}' )
+zip scripts/tmp/"$deploy_file" appspec.yml
+zip scripts/tmp/"$deploy_file" scripts/*
 
 #Upload this file to aws s3 bucket to use it in deploy process
-aws s3 sync scripts/. s3://odoo16-artifact
+aws s3 sync scripts/tmp/. s3://odoo-pipeline-via-aws-s3-bucket
+
 
 rm scripts/"$deploy_file"
 
