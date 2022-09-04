@@ -3,7 +3,8 @@
 #Include in the file upgrade-modules the list of modules you need to be upgraded on the deployment machine
 
 #get database name
-read database_name < scripts/database-name
+dirname=`dirname $0`
+read database_name < "$dirname"/database-name
 echo "@ `date '+%F %H:%M:%S'` ran $0" >> /tmp/trace.txt
 echo "PATH: $PWD" >> /tmp/trace.txt
 echo "database name: $database_name" >> /tmp/trace.txt
