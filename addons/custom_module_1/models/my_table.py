@@ -9,6 +9,6 @@ from odoo import api, fields, models, _
 class my_table(models.Model):
     _name = 'my.table'
 
-    name = fields.Char()
-    name2 = fields.Char()
-    name3 = fields.Char()
+    name = fields.Char('1111')
+    name2 = fields.Char('2222')
+    name3 = fields.Char('3333')
