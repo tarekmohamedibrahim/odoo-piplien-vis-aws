@@ -5,7 +5,7 @@
 #get database name
 read database_name < scripts/database-name
 echo "@ `date '+%F %H:%M:%S'` ran $0" >> /tmp/trace.txt
-echo "PATH: @PWD" >> /tmp/trace.txt
+echo "PATH: $PWD" >> /tmp/trace.txt
 if [ -n "$database_name" ]; then
     #Install modules
     while read module
