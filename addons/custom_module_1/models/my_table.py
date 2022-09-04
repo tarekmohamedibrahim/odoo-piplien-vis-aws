@@ -11,4 +11,4 @@ class my_table(models.Model):
 
     name = fields.Char('x-S3')
     name2 = fields.Char('Y-S3')
-    name3 = fields.Char('Z=S3')
+    name3 = fields.Char('Z-S3')
