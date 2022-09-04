@@ -5,6 +5,7 @@
 #Get modules to be upgraded
 
 dirname=`dirname $0`
+tmp_dir="$dirname/tmp"
 deploy_file='odoo16-deploy.zip'
 branch=`git branch | awk '/* / {print $2}'`
 
@@ -13,15 +14,15 @@ branch=`git branch | awk '/* / {print $2}'`
 
 #Collect files of the next push & Create zip file
 #Note that this script is called from a git hook, at call time, the default path is the root of the git repo
-[ ! -d tmp ] && mkdir tmp
-zip scripts/tmp/"$deploy_file" $(git diff --stat --cached origin/"$branch" | awk -F'|' ' /addons\// {print $1}' )
-zip scripts/tmp/"$deploy_file" appspec.yml
-zip scripts/tmp/"$deploy_file" scripts/*
+[ ! -d "$tmp_dir" ] && mkdir "$tmp_dir"
+zip "$tmp_dir/$deploy_file" $(git diff --stat --cached origin/"$branch" | awk -F'|' ' /addons\// {print $1}' )
+zip "$tmp_dir/$deploy_file" appspec.yml
+zip "$tmp_dir/$deploy_file" scripts/*
 
 #Upload this file to aws s3 bucket to use it in deploy process
 aws s3 sync scripts/tmp/. s3://odoo-pipeline-via-aws-s3-bucket
 
 
-rm scripts/"$deploy_file"
+rm "$tmp_dir/$deploy_file"
 
 exit 0
